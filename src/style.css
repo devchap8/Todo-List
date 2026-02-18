@@ -1,0 +1,26 @@
+* {
+    padding: 0;
+    margin: 0;
+}
+
+.homepage {
+    display: grid;
+    grid-template-rows: 100px 1fr;
+    grid-template-columns: 1fr 3.5fr;
+    height: 100vh;
+}
+
+.homepageHeader {
+    background-color: lightblue;
+    grid-column: span 2;
+}
+
+.homepageSidebar {
+    background-color: lightcoral;
+    height: 100%;
+}
+
+.homepageMain {
+    background-color: lightgreen;
+    min-height: 100%;
+}

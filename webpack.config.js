@@ -14,6 +14,11 @@ export default {
     path: path.resolve(__dirname, 'dist'),
     clean: true,
   },
+  devServer: {
+    static: "./dist",
+    watchFiles: ["./src/**/*"],
+    hot: true,
+  },
   plugins: [
     new HtmlWebpackPlugin({
       template: './src/template.html',
