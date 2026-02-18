@@ -1,26 +1,142 @@
 * {
     padding: 0;
     margin: 0;
+    box-sizing: border-box;
+}
+
+:root {
+    --deep-gray: #121212;
+    --dark-gray: #1e1e1e;
+    --charcoal: #333333;
+    --slate-gray: #4a4a4a;
+    --off-white: #e0e0e0;
+    --stone-gray: #9e9e9e;
+    /* Colors to mark importance of tasks */
+    --prio1: #aee2ff;
+    --prio2: #8b93ff;
+    --prio3: #5D5FEF;
+    --prio4: #483285;
+    --prio5: #3d246c;
 }
 
 .homepage {
     display: grid;
     grid-template-rows: 100px 1fr;
-    grid-template-columns: 1fr 3.5fr;
+    grid-template-columns: 1fr 4fr;
     height: 100vh;
 }
 
+/* Header */
+
 .homepageHeader {
-    background-color: lightblue;
+    background-color: var(--deep-gray);
+    color: var(--off-white);
     grid-column: span 2;
 }
 
-.homepageSidebar {
-    background-color: lightcoral;
-    height: 100%;
+.homepageHeaderText {
+    font-size: 4rem;
+    font-weight: bold;
+    text-align: center;
 }
 
-.homepageMain {
-    background-color: lightgreen;
-    min-height: 100%;
+/* Sidebar */
+
+.homepageSidebar {
+    background-color: var(--deep-gray);
+    color: var(--off-white);
+    height: 100%;
+    padding: 10px 25px;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
 }
+
+.sidebarTitle {
+    font-size: 2rem;
+    font-weight: bold;
+}
+
+.sidebarTitle:nth-last-child(1 of .sidebarTitle) {
+    margin-top: 10px;
+}
+
+.homepageSidebar button {
+    border: none;
+    background-color: transparent;
+    font-size: 1.5rem;
+    text-align: left;
+    padding-left: 15px;
+    color: var(--stone-gray);
+}
+
+.homepageSidebar button:hover {
+    background-color: var(--slate-gray);
+    cursor: pointer;
+}
+
+/* Main task display */
+
+.homepageMain {
+    background-color: var(--charcoal);
+    min-height: 100%;
+    display: grid;
+    grid-template-rows: 60px 1fr;
+}
+
+.homepageMainTitle {
+    background-color: var(--charcoal);
+    color: var(--off-white);
+    font-size: 2.5rem;
+    font-weight: bold;
+    padding-top: 5px;
+    padding-left: 20px;
+}
+
+.taskDisplay {
+    display: flex;
+    flex-direction: column;
+    padding: 10px;
+    gap: 10px;
+}
+
+.task {
+    border: none;
+    border-left: 25px solid;
+    font-size: 1.65rem;
+    height: 50px;
+    display: flex;
+    align-items: center;
+    padding:  0 15px;
+    gap: 15px;
+    background-color: var(--slate-gray);
+    color: var(--stone-gray);
+}
+
+.task:hover {
+    cursor: pointer;
+    border: 2px solid;
+    border-left: 25px solid;
+}
+
+.taskDate {
+    margin-left: auto;
+}
+
+.prio1, .prio1:hover {
+    border-color: var(--prio1);
+}
+.prio2, .prio2:hover {
+    border-color: var(--prio2);
+}
+.prio3, .prio3:hover {
+    border-color: var(--prio3);
+}
+.prio4, .prio4:hover {
+    border-color: var(--prio4);
+}
+.prio5, .prio5:hover {
+    border-color: var(--prio5);
+}
+
+
