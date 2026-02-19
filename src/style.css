@@ -19,6 +19,27 @@
     --prio5: #3d246c;
 }
 
+body {
+    position: relative;
+}
+
+.addTaskButton {
+    position: absolute;
+    bottom: 25px;
+    left: 25px;
+    font-size: 50px;
+    width: 50px;
+    border-radius: 50%;
+    border: none;
+    color: var(--off-white);
+    background-color: var(--prio3);
+}
+
+.addTaskButton:hover {
+    background-color: var(--prio2);
+    cursor: pointer;
+}
+
 .homepage {
     display: grid;
     grid-template-rows: 100px 1fr;
