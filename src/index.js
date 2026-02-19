@@ -1,4 +1,3 @@
 import "./style.css";
-import {logicHandling} from "./logicHandling.js"
+import {TaskState} from "./taskState.js";
 
-logicHandling.testLog();

@@ -21,8 +21,22 @@ makeClass function
 
 */
 
+class Task {
+    constructor(name, date, description, priority) {
+        this.name = name;
+        this.date = date;
+        this.description = description;
+        this.priority = priority || 5;
+        this.id = crypto.randomUUID();
+        this.checked = false;
+    }
+    toggleChecked() {
+        this.checked === true ? this.checked = false : this.checked = true;
+    }
+}
 
 
 
-const logicHandling = {};
-export {logicHandling};
+
+const TaskState = {};
+export {TaskState};
