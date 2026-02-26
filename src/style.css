@@ -171,7 +171,37 @@ body {
     top: 50%;
     left: 50%;
     transform: translateY(-50%) translateX(-50%);
-    height: 400px;
-    width: 400px;
+    height: 600px;
+    width: 600px;
     background-color: white;
 }
+
+.addTaskScreen > form {
+    display: grid;
+    grid-auto-rows: 1fr;
+    height: 100%;
+    width: 100%;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+
+.formTitle {
+    font-size: 3rem;
+}
+
+label {
+    display: flex;
+    width: 100%;
+}
+
+label > span {
+    margin-right: auto;
+    font-size: 1.5rem;
+}
+
+label > input,
+label > select {
+    margin-left: 100px;
+}
+
