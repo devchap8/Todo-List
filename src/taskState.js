@@ -2,11 +2,12 @@ const taskList = [];
 const getTaskList = () => [...taskList];
 
 class Task {
-    constructor(name, date, description, priority) {
+    constructor(name, date, description, priority, project) {
         this.name = name;
         this.date = date;
         this.description = description;
         this.priority = priority || 5;
+        this.project = project || null;
         this.id = crypto.randomUUID();
         this.checked = false;
     }
