@@ -6,8 +6,8 @@
     <title>ToDo</title>
 </head>
 <body>
-    <button class="addTaskButton">+</button>
     <div class="homepage">
+        <button class="addTaskButton">+</button>
         <div class="homepageHeader">
             <div class="homepageHeaderText">TODO</div>
         </div>
@@ -21,13 +21,40 @@
             <button class="sidebarItem">Project 1</button>
             <button class="sidebarItem">Project 2</button>
             <button class="sidebarItem">Project 3</button>
+            <button class="newProjectButton sidebarItem">New Project</button>
         </div>
         <div class="homepageMain">
             <div class="homepageMainTitle">All</div>
             <div class="taskDisplay">
-
             </div>
         </div>
+    </div>
+    <div class="addTaskScreen">
+        <form action="" method="set">
+            <div class="formTitle">New Task:</div>
+            <label for="name">
+                <input type="text" id="name" name="name" placeholder="" required>
+                <span>Task Name</span>
+            </label>
+            <label for="date">
+                <input type="date" id="date" name="date" placeholder="" required>
+                <span>Due Date</span>
+            </label>
+            <label for="description">
+                <input type="text" id="description" name="description" placeholder="">
+                <span>Description</span>
+            </label>
+            <label for="priority">
+                <input type="number" min="1" max="5" id="priority" name="priority" placeholder="5" required>
+                <span>Priority</span>
+            </label>
+            <label for="project">
+                <select name="project" id="project">
+                    
+                </select>
+            </label>
+        </form>
+
     </div>
 </body>
 </html>

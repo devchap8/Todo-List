@@ -5,7 +5,7 @@ class Task {
     constructor(name, date, description, priority, project) {
         this.name = name;
         this.date = date;
-        this.description = description;
+        this.description = description || null;
         this.priority = priority || 5;
         this.project = project || null;
         this.id = crypto.randomUUID();
