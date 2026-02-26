@@ -16,8 +16,8 @@ class Task {
     }
 }
 
-const makeTask = (name, date, description, priority) => {
-    const myTask = new Task(name, date, description, priority);
+const makeTask = (name, date, description, priority, project) => {
+    const myTask = new Task(name, date, description, priority, project);
     taskList.push(myTask);
 }
 

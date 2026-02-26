@@ -140,7 +140,11 @@ body {
     border-left: 25px solid;
 }
 
-.taskDate {
+/* .taskDate {
+    margin-left: auto;
+} */
+
+.taskProject {
     margin-left: auto;
 }
 
