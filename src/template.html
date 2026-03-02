@@ -29,7 +29,7 @@
             </div>
         </div>
     </div>
-    <div class="addTaskScreen">
+    <div class="addTaskScreen addScreen hidden">
         <form action="" method="set">
             <div class="formTitle">New Task</div>
             <label for="name">
@@ -55,6 +55,16 @@
                 </select>
             </label>
             <input type="submit" value="Add Task">
+        </form>
+    </div>
+    <div class="addProjectScreen addScreen">
+        <form action="" method="set">
+            <div class="formTitle">New Project</div>
+            <label for="project">
+                <div>Project Name</div>
+                <input type="text" id="project" name="project" placeholder="" required>
+            </label>
+            <input type="submit" value="Add Project">
         </form>
     </div>
 </body>
