@@ -5,6 +5,7 @@ import { ProjectState } from "./projectState.js";
 
 const newProjectButton = document.querySelector(".newProjectButton");
 const addProjectScreen = document.querySelector(".addProjectScreen");
+let addProjectNameBar = document.querySelector("#projectName");
 
 const addProjectButtonEventListener = () => {
     newProjectButton.addEventListener("click", toggleAddProjectScreen);
@@ -13,6 +14,7 @@ const addProjectButtonEventListener = () => {
 const toggleAddProjectScreen = () => {
     addProjectScreen.classList.contains("hidden") ? addProjectScreen.classList.remove("hidden") :
         addProjectScreen.classList.add("hidden");
+    addProjectNameBar.value = "";
 }
 
 TaskState.makeTask("MyTask", "September 16", "This is the description", 1, "Project 1");
