@@ -68,14 +68,17 @@ body {
 
 /* Sidebar */
 
-.homepageSidebar {
+.homepageSidebar,
+.sidebarProjects {
     background-color: var(--deep-gray);
     color: var(--off-white);
-    height: 100%;
-    padding: 10px 25px;
     display: flex;
     flex-direction: column;
     gap: 6px;
+}
+
+.homepageSidebar {
+    padding: 10px 25px;
 }
 
 .sidebarTitle {

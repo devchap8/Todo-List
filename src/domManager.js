@@ -1,4 +1,5 @@
 const taskDisplay = document.querySelector(".taskDisplay");
+const sidebarProjects = document.querySelector(".sidebarProjects");
 
 const displayTask = (task) => {
     const newTask = document.createElement("button");
@@ -19,5 +20,12 @@ const displayTask = (task) => {
     taskDisplay.appendChild(newTask);
 }
 
-const DomManager = {displayTask};
+const displayProject = (project) => {
+    const newProject = document.createElement("button");
+    newProject.classList.add("sidebarItem");
+    newProject.innerHTML = project.name;
+    sidebarProjects.appendChild(newProject);
+}
+
+const DomManager = {displayTask, displayProject};
 export {DomManager};
