@@ -17,7 +17,8 @@ const makeProject = (name) => {
     });
     if(!projectListContainsSameName) {
         const myProject = new Project(name);
-        projectList.push(myProject)
+        projectList.push(myProject);
+        return myProject;
     }
 }
 

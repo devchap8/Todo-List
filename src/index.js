@@ -5,17 +5,32 @@ import { ProjectState } from "./projectState.js";
 
 const newProjectButton = document.querySelector(".newProjectButton");
 const addProjectScreen = document.querySelector(".addProjectScreen");
-let addProjectNameBar = document.querySelector("#projectName");
+const addProjectNameBar = document.querySelector("#projectName");
+const projectForm = document.querySelector(".addProjectScreen form");
+
 
 const addProjectButtonEventListener = () => {
     newProjectButton.addEventListener("click", toggleAddProjectScreen);
 }
-
 const toggleAddProjectScreen = () => {
     addProjectScreen.classList.contains("hidden") ? addProjectScreen.classList.remove("hidden") :
         addProjectScreen.classList.add("hidden");
     addProjectNameBar.value = "";
 }
+
+// addProjectFormSubmitEventListener = () => {
+//     projectForm.addEventListener("submit", parseProjectFormData);
+// }
+
+const parseProjectFormData = (event) => {
+    event.preventDefault();
+    const projectData = new FormData(projectForm);
+    const projectName = projectData.get("projectName");
+    const myProject = ProjectState.makeProject(projectName);
+    DomManager.displayProject(myProject);
+    toggleAddProjectScreen();
+}
+projectForm.addEventListener("submit", parseProjectFormData);
 
 TaskState.makeTask("MyTask", "September 16", "This is the description", 1, "Project 1");
 TaskState.makeTask("MyTask", "September 16", "This is the description", 2, "Project 1");
