@@ -19,6 +19,7 @@ class Task {
 const makeTask = (name, date, description, priority, project) => {
     const myTask = new Task(name, date, description, priority, project);
     taskList.push(myTask);
+    return myTask;
 }
 
 const TaskState = {getTaskList, makeTask};

@@ -48,6 +48,7 @@ const displayProject = (project) => {
     newProject.classList.add("sidebarItem");
     newProject.innerHTML = project.name;
     sidebarProjects.appendChild(newProject);
+    addProjectToFormList(project);
 }
 
 const addProjectToFormList = (project) => {

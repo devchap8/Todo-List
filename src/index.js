@@ -5,6 +5,7 @@ import { ProjectState } from "./projectState.js";
 import { FormHandling } from "./formHandling.js";
 
 const addTaskButton = document.querySelector(".addTaskButton");
+const submitTaskButton = document.querySelector(".submitTaskButton")
 const newProjectButton = document.querySelector(".newProjectButton");
 const projectForm = document.querySelector(".addProjectScreen form");
 
@@ -12,11 +13,13 @@ const projectForm = document.querySelector(".addProjectScreen form");
 const addTaskButtonEventListener = () => {
     addTaskButton.addEventListener("click", DomManager.toggleAddTaskScreen)
 }
+const addSubmitTaskButtonEventListener = () => {
+    submitTaskButton.addEventListener("click", FormHandling.parseTaskFormData);
+}
 
 const addProjectButtonEventListener = () => {
     newProjectButton.addEventListener("click", DomManager.toggleAddProjectScreen);
 }
-
 function addProjectFormSubmitEventListener() {
     projectForm.addEventListener("submit", FormHandling.parseProjectFormData);
 }
@@ -33,9 +36,7 @@ TaskState.makeTask("MyTask", "September 16", "This is the description", 5, "Proj
 const project1 = ProjectState.makeProject("Project 1");
 const project2 = ProjectState.makeProject("Project 2");
 const project3 = ProjectState.makeProject("Project 3");
-DomManager.addProjectToFormList(project1);
-DomManager.addProjectToFormList(project2);
-DomManager.addProjectToFormList(project3);
+
 
 for(const task of TaskState.getTaskList()) {
     DomManager.displayTask(task);
@@ -47,5 +48,5 @@ for(const project of ProjectState.getProjectList()) {
 addProjectButtonEventListener();
 addProjectFormSubmitEventListener();
 addTaskButtonEventListener();
-
+addSubmitTaskButtonEventListener();
 
