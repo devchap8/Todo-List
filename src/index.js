@@ -3,11 +3,13 @@ import { TaskState } from "./taskState.js";
 import { DomManager } from "./domManager.js";
 import { ProjectState } from "./projectState.js";
 import { FormHandling } from "./formHandling.js";
+import { TaskSorting } from "./taskSorting.js";
 
 const addTaskButton = document.querySelector(".addTaskButton");
 const submitTaskButton = document.querySelector(".submitTaskButton")
 const newProjectButton = document.querySelector(".newProjectButton");
 const projectForm = document.querySelector(".addProjectScreen form");
+const allTasksButton = document.querySelector(".sidebarAll");
 
 
 const addTaskButtonEventListener = () => {
@@ -22,6 +24,10 @@ const addProjectButtonEventListener = () => {
 }
 function addProjectFormSubmitEventListener() {
     projectForm.addEventListener("submit", FormHandling.parseProjectFormData);
+}
+
+const addAllTasksButtonEventListener = () => {
+    allTasksButton.addEventListener("click", TaskSorting.displayTasksAll);
 }
 
 
@@ -49,4 +55,5 @@ addProjectButtonEventListener();
 addProjectFormSubmitEventListener();
 addTaskButtonEventListener();
 addSubmitTaskButtonEventListener();
+addAllTasksButtonEventListener();
 
