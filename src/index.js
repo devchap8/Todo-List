@@ -2,33 +2,18 @@ import "./style.css";
 import { TaskState } from "./taskState.js";
 import { DomManager } from "./domManager.js";
 import { ProjectState } from "./projectState.js";
+import { FormHandling } from "./formHandling.js";
 
 const newProjectButton = document.querySelector(".newProjectButton");
-const addProjectScreen = document.querySelector(".addProjectScreen");
-const addProjectNameBar = document.querySelector("#projectName");
 const projectForm = document.querySelector(".addProjectScreen form");
 
 
 const addProjectButtonEventListener = () => {
-    newProjectButton.addEventListener("click", toggleAddProjectScreen);
-}
-const toggleAddProjectScreen = () => {
-    addProjectScreen.classList.contains("hidden") ? addProjectScreen.classList.remove("hidden") :
-        addProjectScreen.classList.add("hidden");
-    addProjectNameBar.value = "";
+    newProjectButton.addEventListener("click", DomManager.toggleAddProjectScreen);
 }
 
 function addProjectFormSubmitEventListener() {
-    projectForm.addEventListener("submit", parseProjectFormData);
-}
-const parseProjectFormData = (event) => {
-    event.preventDefault();
-    const projectData = new FormData(projectForm);
-    const projectName = projectData.get("projectName");
-    const myProject = ProjectState.makeProject(projectName);
-    DomManager.displayProject(myProject);
-    DomManager.addProjectToFormList(myProject);
-    toggleAddProjectScreen();
+    projectForm.addEventListener("submit", FormHandling.parseProjectFormData);
 }
 
 

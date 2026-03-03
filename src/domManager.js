@@ -1,6 +1,8 @@
 const taskDisplay = document.querySelector(".taskDisplay");
 const sidebarProjects = document.querySelector(".sidebarProjects");
 const projectSelect = document.querySelector("#projectSelect");
+const addProjectScreen = document.querySelector(".addProjectScreen");
+const addProjectNameBar = document.querySelector("#projectName");
 
 const displayTask = (task) => {
     const newTask = document.createElement("button");
@@ -21,6 +23,12 @@ const displayTask = (task) => {
     taskDisplay.appendChild(newTask);
 }
 
+const toggleAddProjectScreen = () => {
+    addProjectScreen.classList.contains("hidden") ? addProjectScreen.classList.remove("hidden") :
+        addProjectScreen.classList.add("hidden");
+    addProjectNameBar.value = "";
+}
+
 const displayProject = (project) => {
     const newProject = document.createElement("button");
     newProject.classList.add("sidebarItem");
@@ -36,5 +44,5 @@ const addProjectToFormList = (project) => {
     console.log(projectSelect);
 }
 
-const DomManager = {displayTask, displayProject, addProjectToFormList};
+const DomManager = {displayTask, displayProject, addProjectToFormList, toggleAddProjectScreen};
 export {DomManager};
