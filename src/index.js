@@ -4,9 +4,14 @@ import { DomManager } from "./domManager.js";
 import { ProjectState } from "./projectState.js";
 import { FormHandling } from "./formHandling.js";
 
+const addTaskButton = document.querySelector(".addTaskButton");
 const newProjectButton = document.querySelector(".newProjectButton");
 const projectForm = document.querySelector(".addProjectScreen form");
 
+
+const addTaskButtonEventListener = () => {
+    addTaskButton.addEventListener("click", DomManager.toggleAddTaskScreen)
+}
 
 const addProjectButtonEventListener = () => {
     newProjectButton.addEventListener("click", DomManager.toggleAddProjectScreen);
@@ -31,7 +36,6 @@ const project3 = ProjectState.makeProject("Project 3");
 DomManager.addProjectToFormList(project1);
 DomManager.addProjectToFormList(project2);
 DomManager.addProjectToFormList(project3);
-console.log(ProjectState.getProjectList());
 
 for(const task of TaskState.getTaskList()) {
     DomManager.displayTask(task);
@@ -42,5 +46,6 @@ for(const project of ProjectState.getProjectList()) {
 
 addProjectButtonEventListener();
 addProjectFormSubmitEventListener();
+addTaskButtonEventListener();
 
 

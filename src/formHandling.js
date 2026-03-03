@@ -1,5 +1,6 @@
 import { ProjectState } from "./projectState.js";
 import { DomManager } from "./domManager.js";
+import { TaskState } from "./taskState.js";
 
 const projectForm = document.querySelector(".addProjectScreen form");
 
