@@ -1,5 +1,6 @@
 const taskDisplay = document.querySelector(".taskDisplay");
 const sidebarProjects = document.querySelector(".sidebarProjects");
+const projectSelect = document.querySelector("#projectSelect");
 
 const displayTask = (task) => {
     const newTask = document.createElement("button");
@@ -27,5 +28,13 @@ const displayProject = (project) => {
     sidebarProjects.appendChild(newProject);
 }
 
-const DomManager = {displayTask, displayProject};
+const addProjectToFormList = (project) => {
+    const newProject = document.createElement("option");
+    newProject.value = project.name;
+    newProject.innerHTML = project.name;
+    projectSelect.appendChild(newProject);
+    console.log(projectSelect);
+}
+
+const DomManager = {displayTask, displayProject, addProjectToFormList};
 export {DomManager};
