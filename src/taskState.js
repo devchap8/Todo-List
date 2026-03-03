@@ -1,4 +1,4 @@
-import { format } from "date-fns";
+import { format, parseISO } from "date-fns";
 
 const taskList = [];
 const getTaskList = () => [...taskList];
@@ -6,7 +6,8 @@ const getTaskList = () => [...taskList];
 class Task {
     constructor(name, date, description, priority, project) {
         this.name = name;
-        this.date = format(date, 'MM/dd/yyyy');
+        const localDate = new Date(date.replace(/-/g, '\/'));
+        this.date = format(localDate, 'MM/dd/yyyy');
         this.description = description || null;
         this.priority = priority || 5;
         this.project = project || null;

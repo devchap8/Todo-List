@@ -10,6 +10,7 @@ const submitTaskButton = document.querySelector(".submitTaskButton")
 const newProjectButton = document.querySelector(".newProjectButton");
 const projectForm = document.querySelector(".addProjectScreen form");
 const allTasksButton = document.querySelector(".sidebarAll");
+const todayTasksButton = document.querySelector(".sidebarToday");
 
 
 const addTaskButtonEventListener = () => {
@@ -29,6 +30,9 @@ function addProjectFormSubmitEventListener() {
 const addAllTasksButtonEventListener = () => {
     allTasksButton.addEventListener("click", TaskSorting.displayTasksAll);
 }
+const addTodayTasksButtonEventListener = () => {
+    todayTasksButton.addEventListener("click", TaskSorting.displayTasksToday);
+}
 
 
 // Initial Setup
@@ -38,6 +42,7 @@ TaskState.makeTask("MyTask", "09/16/2026", "This is the description", 2, "Projec
 TaskState.makeTask("MyTask", "09/16/2026", "This is the description", 3, "Project 1");
 TaskState.makeTask("MyTask", "09/16/2026", "This is the description", 4, "Project 1");
 TaskState.makeTask("MyTask", "09/16/2026", "This is the description", 5, "Project 1");
+TaskState.makeTask("MyTask", "03/03/2026", "This is the description", 5, "Project 1");
 
 const project1 = ProjectState.makeProject("Project 1");
 const project2 = ProjectState.makeProject("Project 2");
@@ -56,4 +61,5 @@ addProjectFormSubmitEventListener();
 addTaskButtonEventListener();
 addSubmitTaskButtonEventListener();
 addAllTasksButtonEventListener();
+addTodayTasksButtonEventListener();
 
