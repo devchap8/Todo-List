@@ -33,11 +33,11 @@ const addAllTasksButtonEventListener = () => {
 
 // Initial Setup
 
-TaskState.makeTask("MyTask", "September 16", "This is the description", 1, "Project 1");
-TaskState.makeTask("MyTask", "September 16", "This is the description", 2, "Project 1");
-TaskState.makeTask("MyTask", "September 16", "This is the description", 3, "Project 1");
-TaskState.makeTask("MyTask", "September 16", "This is the description", 4, "Project 1");
-TaskState.makeTask("MyTask", "September 16", "This is the description", 5, "Project 1");
+TaskState.makeTask("MyTask", "09/16/2026", "This is the description", 1, "Project 1");
+TaskState.makeTask("MyTask", "09/16/2026", "This is the description", 2, "Project 1");
+TaskState.makeTask("MyTask", "09/16/2026", "This is the description", 3, "Project 1");
+TaskState.makeTask("MyTask", "09/16/2026", "This is the description", 4, "Project 1");
+TaskState.makeTask("MyTask", "09/16/2026", "This is the description", 5, "Project 1");
 
 const project1 = ProjectState.makeProject("Project 1");
 const project2 = ProjectState.makeProject("Project 2");

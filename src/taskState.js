@@ -1,10 +1,12 @@
+import { format } from "date-fns";
+
 const taskList = [];
 const getTaskList = () => [...taskList];
 
 class Task {
     constructor(name, date, description, priority, project) {
         this.name = name;
-        this.date = date;
+        this.date = format(date, 'MM/dd/yyyy');
         this.description = description || null;
         this.priority = priority || 5;
         this.project = project || null;

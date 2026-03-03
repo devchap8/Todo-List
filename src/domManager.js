@@ -30,6 +30,7 @@ const displayTask = (task) => {
     newTask.appendChild(taskProject);
     newTask.appendChild(taskDate);
     taskDisplay.appendChild(newTask);
+
 }
 
 const toggleAddTaskScreen = () => {
