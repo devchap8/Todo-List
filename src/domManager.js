@@ -1,3 +1,4 @@
+const homepage = document.querySelector(".homepage");
 const taskDisplay = document.querySelector(".taskDisplay");
 const sidebarProjects = document.querySelector(".sidebarProjects");
 const projectSelect = document.querySelector("#taskProjectSelect");
@@ -35,12 +36,19 @@ const toggleAddTaskScreen = () => {
     addTaskScreen.classList.contains("hidden") ? addTaskScreen.classList.remove("hidden") :
         addTaskScreen.classList.add("hidden");
     Object.values(taskFormElements).forEach(element => element.value = "");
+    toggleBlur();
 }
 
 const toggleAddProjectScreen = () => {
     addProjectScreen.classList.contains("hidden") ? addProjectScreen.classList.remove("hidden") :
         addProjectScreen.classList.add("hidden");
     addProjectNameBar.value = "";
+    toggleBlur();
+}
+
+const toggleBlur = () => {
+    homepage.classList.contains("blurred") ? homepage.classList.remove("blurred") : 
+        homepage.classList.add("blurred");
 }
 
 const displayProject = (project) => {
@@ -58,5 +66,6 @@ const addProjectToFormList = (project) => {
     projectSelect.appendChild(newProject);
 }
 
-const DomManager = {displayTask, displayProject, addProjectToFormList, toggleAddProjectScreen, toggleAddTaskScreen};
+const DomManager = {displayTask, displayProject, addProjectToFormList, toggleAddProjectScreen, 
+    toggleAddTaskScreen, toggleBlur};
 export {DomManager};

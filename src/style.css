@@ -23,6 +23,10 @@
     display: none;
 }
 
+.blurred {
+    filter: blur(10px);
+}
+
 
 body {
     position: relative;
@@ -50,6 +54,7 @@ body {
     grid-template-rows: 100px 1fr;
     grid-template-columns: 1fr 4fr;
     height: 100vh;
+    transition: .5s ease;
 }
 
 /* Header */

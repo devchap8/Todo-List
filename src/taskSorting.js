@@ -1,0 +1,1 @@
+const taskDisplay = document.querySelector(".taskDisplay");
