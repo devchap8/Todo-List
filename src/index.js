@@ -13,6 +13,7 @@ const projectForm = document.querySelector(".addProjectScreen form");
 const allTasksButton = document.querySelector(".sidebarAll");
 const todayTasksButton = document.querySelector(".sidebarToday");
 const weekTasksButton = document.querySelector(".sidebarThisWeek");
+const importantTasksButton = document.querySelector(".sidebarImportant");
 
 
 const addTaskButtonEventListener = () => {
@@ -38,7 +39,9 @@ const addTodayTasksButtonEventListener = () => {
 const addWeekTasksButtonEventListener = () => {
     weekTasksButton.addEventListener("click", TaskSorting.displayTasksWeek);
 }
-
+const addImportantTasksButtonEventListener = () => {
+    importantTasksButton.addEventListener("click", TaskSorting.displayImportant)
+}
 
 // Initial Setup
 
@@ -69,4 +72,5 @@ addSubmitTaskButtonEventListener();
 addAllTasksButtonEventListener();
 addTodayTasksButtonEventListener();
 addWeekTasksButtonEventListener();
+addImportantTasksButtonEventListener();
 

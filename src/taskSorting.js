@@ -40,5 +40,15 @@ const displayTasksWeek = () => {
     });
 }
 
-const TaskSorting = {clearTaskDisplay, displayTasksAll, displayTasksToday, displayTasksWeek};
+const displayImportant = () => {
+    const taskList = setupDisplay();
+    taskList.forEach(function(task) {
+        if(task.priority === 1) {
+            DomManager.displayTask(task);
+        }
+    })
+}
+
+const TaskSorting = {clearTaskDisplay, displayTasksAll, displayTasksToday, 
+    displayTasksWeek, displayImportant};
 export {TaskSorting};
