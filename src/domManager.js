@@ -55,6 +55,7 @@ const toggleBlur = () => {
 const displayProject = (project) => {
     const newProject = document.createElement("button");
     newProject.classList.add("sidebarItem");
+    newProject.classList.add("sidebarProject");
     newProject.innerHTML = project.name;
     sidebarProjects.appendChild(newProject);
     addProjectToFormList(project);

@@ -49,6 +49,18 @@ const displayImportant = () => {
     })
 }
 
+const displayCertainProject = (event) => {
+    if(event.target.classList.contains("sidebarProject")) {
+        console.log(event.target.innerHTML);
+        const taskList = setupDisplay();
+        taskList.forEach(function(task) {
+            if(task.project === event.target.innerHTML) {
+                DomManager.displayTask(task);
+            }
+        })
+    }
+}
+
 const TaskSorting = {clearTaskDisplay, displayTasksAll, displayTasksToday, 
-    displayTasksWeek, displayImportant};
+    displayTasksWeek, displayImportant, displayCertainProject};
 export {TaskSorting};
