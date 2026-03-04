@@ -4,6 +4,7 @@ import { DomManager } from "./domManager.js";
 import { ProjectState } from "./projectState.js";
 import { FormHandling } from "./formHandling.js";
 import { TaskSorting } from "./taskSorting.js";
+import { format } from "date-fns";
 
 const addTaskButton = document.querySelector(".addTaskButton");
 const submitTaskButton = document.querySelector(".submitTaskButton")
@@ -11,6 +12,7 @@ const newProjectButton = document.querySelector(".newProjectButton");
 const projectForm = document.querySelector(".addProjectScreen form");
 const allTasksButton = document.querySelector(".sidebarAll");
 const todayTasksButton = document.querySelector(".sidebarToday");
+const weekTasksButton = document.querySelector(".sidebarThisWeek");
 
 
 const addTaskButtonEventListener = () => {
@@ -33,6 +35,9 @@ const addAllTasksButtonEventListener = () => {
 const addTodayTasksButtonEventListener = () => {
     todayTasksButton.addEventListener("click", TaskSorting.displayTasksToday);
 }
+const addWeekTasksButtonEventListener = () => {
+    weekTasksButton.addEventListener("click", TaskSorting.displayTasksWeek);
+}
 
 
 // Initial Setup
@@ -42,7 +47,8 @@ TaskState.makeTask("MyTask", "09/16/2026", "This is the description", 2, "Projec
 TaskState.makeTask("MyTask", "09/16/2026", "This is the description", 3, "Project 1");
 TaskState.makeTask("MyTask", "09/16/2026", "This is the description", 4, "Project 1");
 TaskState.makeTask("MyTask", "09/16/2026", "This is the description", 5, "Project 1");
-TaskState.makeTask("MyTask", "03/03/2026", "This is the description", 5, "Project 1");
+const today = format(new Date(), 'MM/dd/yyyy');
+TaskState.makeTask("Due Today", today, "This is the description", 5, "Project 1");
 
 const project1 = ProjectState.makeProject("Project 1");
 const project2 = ProjectState.makeProject("Project 2");
@@ -62,4 +68,5 @@ addTaskButtonEventListener();
 addSubmitTaskButtonEventListener();
 addAllTasksButtonEventListener();
 addTodayTasksButtonEventListener();
+addWeekTasksButtonEventListener();
 
