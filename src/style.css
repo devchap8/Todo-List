@@ -19,10 +19,6 @@
     --prio5: #3d246c;
 }
 
-.hidden {
-    display: none;
-}
-
 .blurred {
     filter: blur(10px);
 }
@@ -271,4 +267,11 @@ label > span {
     display: flex;
     flex-direction: column;
     gap: 10px;
+}
+
+
+/* Keep at bottom for cascade */
+
+.hidden {
+    display: none;
 }

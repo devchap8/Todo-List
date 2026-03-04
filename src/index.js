@@ -15,6 +15,7 @@ const todayTasksButton = document.querySelector(".sidebarToday");
 const weekTasksButton = document.querySelector(".sidebarThisWeek");
 const importantTasksButton = document.querySelector(".sidebarImportant");
 const projectDisplay = document.querySelector(".sidebarProjects");
+const taskDisplay = document.querySelector(".taskDisplay");
 
 // All main event listeners
 
@@ -46,6 +47,10 @@ const addImportantTasksButtonEventListener = () => {
 }
 const addProjectDisplayEventListener = () => {
     projectDisplay.addEventListener("click", TaskSorting.displayCertainProject);
+}
+
+const addTaskDisplayEventListener = () => {
+    taskDisplay.addEventListener("click", DomManager.openTaskInfoScreen);
 }
 
 // Adding / removing event listeners (when form is opened / closed)
@@ -101,3 +106,4 @@ addTodayTasksButtonEventListener();
 addWeekTasksButtonEventListener();
 addImportantTasksButtonEventListener();
 addProjectDisplayEventListener();
+addTaskDisplayEventListener();
