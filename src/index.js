@@ -42,18 +42,33 @@ const addWeekTasksButtonEventListener = () => {
     weekTasksButton.addEventListener("click", TaskSorting.displayTasksWeek);
 }
 const addImportantTasksButtonEventListener = () => {
-    importantTasksButton.addEventListener("click", TaskSorting.displayImportant)
+    importantTasksButton.addEventListener("click", TaskSorting.displayImportant);
 }
-
 const addProjectDisplayEventListener = () => {
     projectDisplay.addEventListener("click", TaskSorting.displayCertainProject);
 }
 
 // Adding / removing event listeners (when form is opened / closed)
 
-// const addHomepageEventListeners = () => {
+const addHomepageChildrenEventListeners = () => {
+    addTaskButtonEventListener();
+    addProjectButtonEventListener();
+    addAllTasksButtonEventListener();
+    addTodayTasksButtonEventListener();
+    addWeekTasksButtonEventListener();
+    addImportantTasksButtonEventListener();
+    addProjectButtonEventListener();
+}
 
-// }
+const removeHomepageChildrenEventListeners = () => {
+    addTaskButton.removeEventListener("click", DomManager.toggleAddTaskScreen);
+    newProjectButton.removeEventListener("click", DomManager.toggleAddProjectScreen);
+    allTasksButton.removeEventListener("click", TaskSorting.displayTasksAll);
+    todayTasksButton.removeEventListener("click", TaskSorting.displayTasksToday);
+    weekTasksButton.removeEventListener("click", TaskSorting.displayTasksWeek);
+    importantTasksButton.removeEventListener("click", TaskSorting.displayImportant);
+    projectDisplay.removeEventListener("click", TaskSorting.displayCertainProject);
+}
 
 // Initial Setup
 
@@ -86,4 +101,3 @@ addTodayTasksButtonEventListener();
 addWeekTasksButtonEventListener();
 addImportantTasksButtonEventListener();
 addProjectDisplayEventListener();
-
