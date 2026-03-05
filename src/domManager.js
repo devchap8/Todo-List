@@ -29,6 +29,10 @@ const displayTask = (task) => {
     const newTask = document.createElement("button");
     newTask.classList.add(`prio${task.priority}`);
     newTask.classList.add("task");
+    const taskCheck = document.createElement("input");
+    taskCheck.type = "checkbox";
+    taskCheck.classList.add("taskCheck");
+    taskCheck.name = "taskCheck";
     const taskTitle = document.createElement("span");
     taskTitle.classList.add("taskTitle");
     taskTitle.innerHTML = task.name;
@@ -39,6 +43,7 @@ const displayTask = (task) => {
     taskProject.classList.add("taskProject");
     taskProject.innerHTML = task.project;
     newTask.id = task.id;
+    newTask.appendChild(taskCheck);
     newTask.appendChild(taskTitle);
     newTask.appendChild(taskProject);
     newTask.appendChild(taskDate);

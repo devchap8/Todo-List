@@ -76,6 +76,21 @@ const addDeleteTaskButtonEventListener = () => {
     deleteTaskButton.addEventListener("click", deleteTask);
 }
 
+const addTaskCheckEventListener = () => {
+    homepage.addEventListener("change", toggleTaskChecked);
+}
+const toggleTaskChecked = (event) => {
+    if(event.target.classList.contains("taskCheck")) {
+        let task = event.target.parentElement;
+        if(event.target.checked) {
+            task.classList.add("checked")
+        }
+        else if(!(event.target.checked)) {
+            task.classList.remove("checked");
+        }
+    }
+}
+
 // Handling for opening / closing forms
 
 const addHomepageChildrenEventListeners = () => {
@@ -86,7 +101,9 @@ const addHomepageChildrenEventListeners = () => {
     addWeekTasksButtonEventListener();
     addImportantTasksButtonEventListener();
     addProjectButtonEventListener();
+    addProjectDisplayEventListener();
     addTaskDisplayEventListener();
+    addTaskCheckEventListener();
 }
 
 const removeHomepageChildrenEventListeners = () => {
@@ -98,12 +115,14 @@ const removeHomepageChildrenEventListeners = () => {
     importantTasksButton.removeEventListener("click", TaskSorting.displayImportant);
     projectDisplay.removeEventListener("click", TaskSorting.displayCertainProject);
     taskDisplay.removeEventListener("click", openScreen);
+    homepage.removeEventListener("click", toggleTaskChecked);
 }
 
 const openScreen = (event) => {
     if(event.target === addTaskButton) DomManager.toggleAddTaskScreen();
     else if(event.target === newProjectButton) DomManager.toggleAddProjectScreen();
-    else if(event.target.classList.contains("task") || event.target.parentElement.classList.contains("task")) {
+    else if((event.target.classList.contains("task") || event.target.parentElement.classList.contains("task"))
+        && !(event.target.classList.contains("taskCheck"))) {
         let targetTask;
         event.target.classList.contains("task") ? targetTask = event.target : targetTask = event.target.parentElement;
         DomManager.openTaskInfoScreen(targetTask);
@@ -156,3 +175,4 @@ addImportantTasksButtonEventListener();
 addProjectDisplayEventListener();
 addTaskDisplayEventListener();
 addDeleteTaskButtonEventListener();
+addTaskCheckEventListener();

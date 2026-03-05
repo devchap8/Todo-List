@@ -143,6 +143,14 @@ body {
     color: var(--stone-gray);
 }
 
+.taskCheck {
+    transform: scale(1.5);
+}
+
+.checked {
+    text-decoration: line-through;
+}
+
 .task:hover {
     cursor: pointer;
     border: 2px solid;
