@@ -91,7 +91,11 @@ const removeHomepageChildrenEventListeners = () => {
 const openScreen = (event) => {
     if(event.target === addTaskButton) DomManager.toggleAddTaskScreen();
     else if(event.target === newProjectButton) DomManager.toggleAddProjectScreen();
-    else if(event.target.classList.contains("task")) DomManager.openTaskInfoScreen(event);
+    else if(event.target.classList.contains("task") || event.target.parentElement.classList.contains("task")) {
+        let targetTask;
+        event.target.classList.contains("task") ? targetTask = event.target : targetTask = event.target.parentElement;
+        DomManager.openTaskInfoScreen(targetTask);
+    }
     removeHomepageChildrenEventListeners();
     setTimeout(() => {
         addHomepageCloseScreenFunctionEventListener();

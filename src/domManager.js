@@ -84,13 +84,12 @@ const addProjectToFormList = (project) => {
     projectSelect.appendChild(newProject);
 }
 
-const openTaskInfoScreen = (event) => {
+const openTaskInfoScreen = (targetTask) => {
     toggleTaskInfoScreen();
-    if(!(event.target.classList.contains("task"))) return;
     const taskList = TaskState.getTaskList();
     let myTask;
     for(const task of taskList) {
-        if(task.id === event.target.id) {
+        if(task.id === targetTask.id) {
             myTask = task;
             break;
         }
