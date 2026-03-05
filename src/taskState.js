@@ -25,5 +25,15 @@ const makeTask = (name, date, description, priority, project) => {
     return myTask;
 }
 
-const TaskState = {getTaskList, makeTask};
+const deleteTaskFromList = (taskID) => {
+    for(let i = 0; i < taskList.length; i++) {
+        if(taskList[i].id === taskID) {
+            console.log("same!!!!!!!!1");
+            taskList.splice(i, 1);
+            break;
+        }
+    }
+}
+
+const TaskState = {getTaskList, makeTask, deleteTaskFromList};
 export {TaskState};

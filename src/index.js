@@ -20,6 +20,8 @@ const addTaskScreen = document.querySelector(".addTaskScreen");
 const addProjectScreen = document.querySelector(".addProjectScreen");
 const taskInfoScreen = document.querySelector(".taskInfoScreen");
 const homepage = document.querySelector(".homepage");
+const taskID = document.querySelector(".taskID");
+const deleteTaskButton = document.querySelector(".deleteTaskButton");
 
 // All main event listeners
 
@@ -62,6 +64,16 @@ const addHomepageCloseScreenFunctionEventListener = () => {
 }
 const removeHomepageCloseScreenFunctionEventListener = () => {
     homepage.removeEventListener("click", closeScreen);
+}
+
+const deleteTask = () => {
+    const deletedTaskID = taskID.id;
+    TaskState.deleteTaskFromList(deletedTaskID);
+    DomManager.deleteTaskFromDom(deletedTaskID);
+    DomManager.toggleTaskInfoScreen();
+}
+const addDeleteTaskButtonEventListener = () => {
+    deleteTaskButton.addEventListener("click", deleteTask);
 }
 
 // Handling for opening / closing forms
@@ -111,27 +123,6 @@ const closeScreen = () => {
 
 }
 
-/* 
-Open screen function
-
-3 screens: New task form, new project form, task info screen
-Change the event listener functions on all of these buttons to the new function
-
-Check the event target. 
-    If it is the add task button, run toggleAddTasksScreen
-    If it is the add project button, run toggleAddProjectScreen
-    If it is a task, run openTaskInfoScreen
-Remove homepage event listeners
-Add close screen function event listener to homepage
-
-Close screen function
-    
-Run the same event target check and run the function
-Readd homepage event listeners
-Remove close screen function event listener from homepage
-
-*/
-
 // Initial Setup
 
 TaskState.makeTask("MyTask", "09/16/2026", "This is the description", 1, "Project 1");
@@ -164,3 +155,4 @@ addWeekTasksButtonEventListener();
 addImportantTasksButtonEventListener();
 addProjectDisplayEventListener();
 addTaskDisplayEventListener();
+addDeleteTaskButtonEventListener();

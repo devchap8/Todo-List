@@ -21,7 +21,8 @@ const taskInfoScreenElements = {
     taskDueDate: document.querySelector(".taskInfoDueDate"),
     taskProject: document.querySelector(".taskInfoProjectName"),
     taskPriority: document.querySelector(".taskInfoPriority"),
-    taskDescription: document.querySelector(".taskInfoDescription")
+    taskDescription: document.querySelector(".taskInfoDescription"),
+    taskID: document.querySelector(".taskID")
 };
 
 const displayTask = (task) => {
@@ -42,7 +43,6 @@ const displayTask = (task) => {
     newTask.appendChild(taskProject);
     newTask.appendChild(taskDate);
     taskDisplay.appendChild(newTask);
-
 }
 
 const toggleAddTaskScreen = () => {
@@ -99,8 +99,13 @@ const openTaskInfoScreen = (targetTask) => {
     taskInfoScreenElements.taskProject.innerHTML = myTask.project;
     taskInfoScreenElements.taskPriority.innerHTML = `Priority: ${myTask.priority}`;
     taskInfoScreenElements.taskDescription.innerHTML = myTask.description;
+    taskInfoScreenElements.taskID.id = myTask.id;
+}
+
+const deleteTaskFromDom = (taskID) => {
+    document.getElementById(taskID).remove();
 }
 
 const DomManager = {displayTask, displayProject, addProjectToFormList, toggleAddProjectScreen, 
-    toggleAddTaskScreen, toggleBlur, toggleTaskInfoScreen, openTaskInfoScreen};
+    toggleAddTaskScreen, toggleBlur, toggleTaskInfoScreen, openTaskInfoScreen, deleteTaskFromDom};
 export {DomManager};
