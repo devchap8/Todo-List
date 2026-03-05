@@ -60,6 +60,7 @@ const toggleAddProjectScreen = () => {
 const toggleTaskInfoScreen = () => {
     taskInfoScreen.classList.contains("hidden") ? taskInfoScreen.classList.remove("hidden") :
         taskInfoScreen.classList.add("hidden");
+    toggleBlur();
 }
 
 const toggleBlur = () => {
@@ -85,7 +86,6 @@ const addProjectToFormList = (project) => {
 
 const openTaskInfoScreen = (event) => {
     toggleTaskInfoScreen();
-    toggleBlur();
     if(!(event.target.classList.contains("task"))) return;
     const taskList = TaskState.getTaskList();
     let myTask;

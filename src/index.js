@@ -16,18 +16,22 @@ const weekTasksButton = document.querySelector(".sidebarThisWeek");
 const importantTasksButton = document.querySelector(".sidebarImportant");
 const projectDisplay = document.querySelector(".sidebarProjects");
 const taskDisplay = document.querySelector(".taskDisplay");
+const addTaskScreen = document.querySelector(".addTaskScreen");
+const addProjectScreen = document.querySelector(".addProjectScreen");
+const taskInfoScreen = document.querySelector(".taskInfoScreen");
+const homepage = document.querySelector(".homepage");
 
 // All main event listeners
 
 const addTaskButtonEventListener = () => {
-    addTaskButton.addEventListener("click", DomManager.toggleAddTaskScreen)
+    addTaskButton.addEventListener("click", openScreen) //
 }
 const addSubmitTaskButtonEventListener = () => {
     submitTaskButton.addEventListener("click", FormHandling.parseTaskFormData);
 }
 
 const addProjectButtonEventListener = () => {
-    newProjectButton.addEventListener("click", DomManager.toggleAddProjectScreen);
+    newProjectButton.addEventListener("click", openScreen); //
 }
 function addProjectFormSubmitEventListener() {
     projectForm.addEventListener("submit", FormHandling.parseProjectFormData);
@@ -50,10 +54,17 @@ const addProjectDisplayEventListener = () => {
 }
 
 const addTaskDisplayEventListener = () => {
-    taskDisplay.addEventListener("click", DomManager.openTaskInfoScreen);
+    taskDisplay.addEventListener("click", openScreen); //
 }
 
-// Adding / removing event listeners (when form is opened / closed)
+const addHomepageCloseScreenFunctionEventListener = () => {
+    homepage.addEventListener("click", closeScreen);
+}
+const removeHomepageCloseScreenFunctionEventListener = () => {
+    homepage.removeEventListener("click", closeScreen);
+}
+
+// Handling for opening / closing forms
 
 const addHomepageChildrenEventListeners = () => {
     addTaskButtonEventListener();
@@ -63,17 +74,59 @@ const addHomepageChildrenEventListeners = () => {
     addWeekTasksButtonEventListener();
     addImportantTasksButtonEventListener();
     addProjectButtonEventListener();
+    addTaskDisplayEventListener();
 }
 
 const removeHomepageChildrenEventListeners = () => {
-    addTaskButton.removeEventListener("click", DomManager.toggleAddTaskScreen);
-    newProjectButton.removeEventListener("click", DomManager.toggleAddProjectScreen);
+    addTaskButton.removeEventListener("click", openScreen);
+    newProjectButton.removeEventListener("click", openScreen);
     allTasksButton.removeEventListener("click", TaskSorting.displayTasksAll);
     todayTasksButton.removeEventListener("click", TaskSorting.displayTasksToday);
     weekTasksButton.removeEventListener("click", TaskSorting.displayTasksWeek);
     importantTasksButton.removeEventListener("click", TaskSorting.displayImportant);
     projectDisplay.removeEventListener("click", TaskSorting.displayCertainProject);
+    taskDisplay.removeEventListener("click", openScreen);
 }
+
+const openScreen = (event) => {
+    if(event.target === addTaskButton) DomManager.toggleAddTaskScreen();
+    else if(event.target === newProjectButton) DomManager.toggleAddProjectScreen();
+    else if(event.target.classList.contains("task")) DomManager.openTaskInfoScreen(event);
+    removeHomepageChildrenEventListeners();
+    setTimeout(() => {
+        addHomepageCloseScreenFunctionEventListener();
+    }, 300); // close screen would always run immediately after open screen without a small delay
+}
+
+const closeScreen = () => {
+    if(!(addTaskScreen.classList.contains("hidden"))) DomManager.toggleAddTaskScreen();
+    else if(!(addProjectScreen.classList.contains("hidden"))) DomManager.toggleAddProjectScreen();
+    else if(!(taskInfoScreen.classList.contains("hidden"))) DomManager.toggleTaskInfoScreen();
+    addHomepageChildrenEventListeners();
+    removeHomepageCloseScreenFunctionEventListener();
+
+}
+
+/* 
+Open screen function
+
+3 screens: New task form, new project form, task info screen
+Change the event listener functions on all of these buttons to the new function
+
+Check the event target. 
+    If it is the add task button, run toggleAddTasksScreen
+    If it is the add project button, run toggleAddProjectScreen
+    If it is a task, run openTaskInfoScreen
+Remove homepage event listeners
+Add close screen function event listener to homepage
+
+Close screen function
+    
+Run the same event target check and run the function
+Readd homepage event listeners
+Remove close screen function event listener from homepage
+
+*/
 
 // Initial Setup
 
