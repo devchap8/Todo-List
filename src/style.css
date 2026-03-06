@@ -183,7 +183,7 @@ body {
     border-color: var(--prio5);
 }
 
-/* New Task Screen */
+/* New Task Screen / Edit Task Screen */
 
 .addScreen {
     position: absolute;
@@ -195,7 +195,8 @@ body {
     background-color: white;
 }
 
-.addTaskScreen > form {
+.addTaskScreen > form,
+.editTaskScreen > form {
     display: grid;
     grid-auto-rows: 1fr;
     height: 100%;
@@ -220,7 +221,9 @@ label > span {
 }
 
 .addTaskScreen label > input,
-.addTaskScreen label > select {
+.addTaskScreen label > select,
+.editTaskScreen label > input,
+.editTaskScreen label > select {
     margin-left: 100px;
 }
 
@@ -267,6 +270,14 @@ label > span {
 .taskInfoTop > span {
     font-size: 3rem;
     margin-right: auto;
+}
+
+.editTaskButton {
+    margin-right: 10px;
+}
+
+.taskInfoTop > button {
+    font-size: 1.25rem;
 }
 
 .taskInfoMiddle {

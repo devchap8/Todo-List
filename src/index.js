@@ -128,6 +128,9 @@ const openScreen = (event) => {
     else if(event.target === newProjectButton) DomManager.toggleAddProjectScreen();
     else if(event.target === editTaskButton) {
         DomManager.toggleTaskInfoScreen();
+        const editTaskID = document.querySelector(".taskID").id;
+        const taskToBeEdited = TaskState.getTaskInfo(editTaskID);
+        DomManager.populateEditTaskFormElements(taskToBeEdited);
         DomManager.toggleEditTaskScreen();
     }
     else if((event.target.classList.contains("task") || event.target.parentElement.classList.contains("task"))

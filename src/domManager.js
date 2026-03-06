@@ -1,9 +1,11 @@
 import { TaskState } from "./taskState.js";
+import { format } from "date-fns";
 
 const homepage = document.querySelector(".homepage");
 const taskDisplay = document.querySelector(".taskDisplay");
 const sidebarProjects = document.querySelector(".sidebarProjects");
 const projectSelect = document.querySelector("#taskProjectSelect");
+const editProjectSelect = document.querySelector("#editTaskProjectSelect");
 const addProjectScreen = document.querySelector(".addProjectScreen");
 const addProjectNameBar = document.querySelector("#projectName");
 const addTaskScreen = document.querySelector(".addTaskScreen");
@@ -15,6 +17,13 @@ const taskFormElements = {
     taskDescription: document.querySelector("#taskDescription"),
     taskPriority: document.querySelector("#taskPriority"),
     taskProjectSelect: document.querySelector("#taskProjectSelect")
+};
+const editTaskFormElements = {
+    taskName: document.querySelector("#editTaskName"),
+    taskDate: document.querySelector("#editTaskDate"),
+    taskDescription: document.querySelector("#editTaskDescription"),
+    taskPriority: document.querySelector("#editTaskPriority"),
+    taskProjectSelect: document.querySelector("#editTaskProjectSelect")
 };
 const taskInfoScreenElements = {
     taskName: document.querySelector(".taskInfoTop > span"),
@@ -93,6 +102,7 @@ const addProjectToFormList = (project) => {
     newProject.value = project.name;
     newProject.innerHTML = project.name;
     projectSelect.appendChild(newProject);
+    editProjectSelect.appendChild(newProject);
 }
 
 const openTaskInfoScreen = (targetTask) => {
@@ -113,10 +123,19 @@ const openTaskInfoScreen = (targetTask) => {
     taskInfoScreenElements.taskID.id = myTask.id;
 }
 
+const populateEditTaskFormElements = (task) => {
+    editTaskFormElements.taskName.value = task.name;
+    const formattedDate = format(task.date, 'yyyy-MM-dd');
+    editTaskFormElements.taskDate.value = formattedDate;
+    editTaskFormElements.taskDescription.value = task.description;
+    editTaskFormElements.taskPriority.value = task.priority;
+    editTaskFormElements.taskProjectSelect.value = task.project;
+}
+
 const deleteTaskFromDom = (taskID) => {
     document.getElementById(taskID).remove();
 }
 
 const DomManager = {displayTask, displayProject, addProjectToFormList, toggleAddProjectScreen, toggleEditTaskScreen, 
-    toggleAddTaskScreen, toggleBlur, toggleTaskInfoScreen, openTaskInfoScreen, deleteTaskFromDom};
+    toggleAddTaskScreen, toggleBlur, toggleTaskInfoScreen, openTaskInfoScreen, deleteTaskFromDom, populateEditTaskFormElements};
 export {DomManager};
