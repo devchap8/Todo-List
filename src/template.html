@@ -57,6 +57,34 @@
             <input type="submit" value="Add Task" class="submitTaskButton">
         </form>
     </div>
+    <div class="editTaskScreen addScreen hidden">
+        <form action="" method="set">
+            <div class="formTitle">Edit Task</div>
+            <label for="editTaskName">
+                <span>Task Name</span>
+                <input type="text" id="editTaskName" name="editTaskName" placeholder="" required>
+            </label>
+            <label for="editTaskDate">
+                <span>Due Date</span>
+                <input type="date" id="editTaskDate" name="editTaskDate" placeholder="" required>
+            </label>
+            <label for="editTaskDescription">
+                <span>Description</span>
+                <input type="text" id="editTaskDescription" name="editTaskDescription" placeholder="">
+            </label>
+            <label for="editTaskPriority">
+                <span>Priority</span>
+                <input type="number" min="1" max="5" id="editTaskPriority" name="editTaskPriority" placeholder="5" required>
+            </label>
+            <label for="editTaskProjectSelect">
+                <span>Project</span>
+                <select name="editTaskProjectSelect" id="editTaskProjectSelect">
+
+                </select>
+            </label>
+            <input type="submit" value="Confirm Edit" class="submitEditTaskButton">
+        </form>
+    </div>
     <div class="addProjectScreen addScreen hidden">
         <form action="" method="set">
             <div class="formTitle">New Project</div>
@@ -71,6 +99,7 @@
         <div class="taskID hidden"></div>
         <div class="taskInfoTop">
             <span>Task Name</span>
+            <button class="editTaskButton">Edit Task</button>
             <button class="deleteTaskButton">Delete Task</button>
         </div>
         <div class="taskInfoMiddle">

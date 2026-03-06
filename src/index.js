@@ -22,6 +22,8 @@ const taskInfoScreen = document.querySelector(".taskInfoScreen");
 const homepage = document.querySelector(".homepage");
 const taskID = document.querySelector(".taskID");
 const deleteTaskButton = document.querySelector(".deleteTaskButton");
+const editTaskButton = document.querySelector(".editTaskButton");
+const editTaskScreen = document.querySelector(".editTaskScreen");
 
 // All main event listeners
 
@@ -54,10 +56,13 @@ const addImportantTasksButtonEventListener = () => {
 const addProjectDisplayEventListener = () => {
     projectDisplay.addEventListener("click", TaskSorting.displayCertainProject);
 }
-
 const addTaskDisplayEventListener = () => {
     taskDisplay.addEventListener("click", openScreen); //
 }
+const addEditTaskButtonEventListener = () => {
+    editTaskButton.addEventListener("click", openScreen); //
+}
+
 
 const addHomepageCloseScreenFunctionEventListener = () => {
     homepage.addEventListener("click", closeScreen);
@@ -121,6 +126,10 @@ const removeHomepageChildrenEventListeners = () => {
 const openScreen = (event) => {
     if(event.target === addTaskButton) DomManager.toggleAddTaskScreen();
     else if(event.target === newProjectButton) DomManager.toggleAddProjectScreen();
+    else if(event.target === editTaskButton) {
+        DomManager.toggleTaskInfoScreen();
+        DomManager.toggleEditTaskScreen();
+    }
     else if((event.target.classList.contains("task") || event.target.parentElement.classList.contains("task"))
         && !(event.target.classList.contains("taskCheck"))) {
         let targetTask;
@@ -136,6 +145,7 @@ const openScreen = (event) => {
 const closeScreen = () => {
     if(!(addTaskScreen.classList.contains("hidden"))) DomManager.toggleAddTaskScreen();
     else if(!(addProjectScreen.classList.contains("hidden"))) DomManager.toggleAddProjectScreen();
+    else if(!(editTaskScreen.classList.contains("hidden"))) DomManager.toggleEditTaskScreen();
     else if(!(taskInfoScreen.classList.contains("hidden"))) DomManager.toggleTaskInfoScreen();
     addHomepageChildrenEventListeners();
     removeHomepageCloseScreenFunctionEventListener();
@@ -175,5 +185,6 @@ addProjectDisplayEventListener();
 addTaskDisplayEventListener();
 addDeleteTaskButtonEventListener();
 addTaskCheckEventListener();
+addEditTaskButtonEventListener();
 
 TaskSorting.displayTasksAll(); // So tasks are sorted when user opens program
