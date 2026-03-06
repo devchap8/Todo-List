@@ -4,6 +4,7 @@ import { TaskState } from "./taskState.js";
 
 const projectForm = document.querySelector(".addProjectScreen form");
 const taskForm = document.querySelector(".addTaskScreen form");
+const editTaskForm = document.querySelector(".editTaskScreen form");
 
 const parseProjectFormData = (event) => {
     event.preventDefault();
@@ -27,6 +28,20 @@ const parseTaskFormData = (event) => {
     DomManager.toggleAddTaskScreen();
 }
 
+const parseEditTaskFormData = (event) => {
+    event.preventDefault();
+    const taskData = new FormData(editTaskForm);
+    console.log(taskData);
+    const taskInfo = {
+        name: taskData.get("editTaskName"),
+        date: taskData.get("editTaskDate"),
+        description: taskData.get("editTaskDescription"),
+        priority: taskData.get("editTaskPriority"),
+        project: taskData.get("editTaskProjectSelect")
+    };
+    return taskInfo;
+}
 
-const FormHandling = {parseProjectFormData, parseTaskFormData};
+
+const FormHandling = {parseProjectFormData, parseTaskFormData, parseEditTaskFormData};
 export {FormHandling};

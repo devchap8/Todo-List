@@ -24,6 +24,7 @@ const taskID = document.querySelector(".taskID");
 const deleteTaskButton = document.querySelector(".deleteTaskButton");
 const editTaskButton = document.querySelector(".editTaskButton");
 const editTaskScreen = document.querySelector(".editTaskScreen");
+const submitEditTaskButton = document.querySelector(".submitEditTaskButton");
 
 // All main event listeners
 
@@ -39,6 +40,13 @@ const addProjectButtonEventListener = () => {
 }
 function addProjectFormSubmitEventListener() {
     projectForm.addEventListener("submit", FormHandling.parseProjectFormData);
+}
+
+const addEditTaskButtonEventListener = () => {
+    editTaskButton.addEventListener("click", openScreen); //
+}
+const addSubmitEditTaskButtonEventListener = () => {
+    submitEditTaskButton.addEventListener("click", editTask);
 }
 
 const addAllTasksButtonEventListener = () => {
@@ -59,9 +67,7 @@ const addProjectDisplayEventListener = () => {
 const addTaskDisplayEventListener = () => {
     taskDisplay.addEventListener("click", openScreen); //
 }
-const addEditTaskButtonEventListener = () => {
-    editTaskButton.addEventListener("click", openScreen); //
-}
+
 
 
 const addHomepageCloseScreenFunctionEventListener = () => {
@@ -69,6 +75,15 @@ const addHomepageCloseScreenFunctionEventListener = () => {
 }
 const removeHomepageCloseScreenFunctionEventListener = () => {
     homepage.removeEventListener("click", closeScreen);
+}
+
+const editTask = (event) => {
+    event.preventDefault();
+    const editTaskID = document.querySelector(".taskID").id;
+    const taskInfo = FormHandling.parseEditTaskFormData(event);
+    TaskState.editTaskInfo(editTaskID, taskInfo);
+    DomManager.editTaskInDom(editTaskID, taskInfo);
+    closeScreen();
 }
 
 const deleteTask = () => {
@@ -159,7 +174,7 @@ const closeScreen = () => {
 
 TaskState.makeTask("Long Description", "09/16/2026", "hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello ", 1, "Project 2");
 TaskState.makeTask("MyTask", "09/16/2026", "This is the description", 2, "Project 1");
-TaskState.makeTask("MyTask", "08/16/2026", "This is the description", 3, "Project 1");
+TaskState.makeTask("MyTask", "08/16/2026", "This is the description", 3, "Project 2");
 TaskState.makeTask("MyTask", "09/16/2027", "This is the description", 4, "Project 1");
 TaskState.makeTask("MyTask", "09/25/2026", "This is the description", 5, "Project 1");
 const today = format(new Date(), 'MM/dd/yyyy');
@@ -189,5 +204,6 @@ addTaskDisplayEventListener();
 addDeleteTaskButtonEventListener();
 addTaskCheckEventListener();
 addEditTaskButtonEventListener();
+addSubmitEditTaskButtonEventListener();
 
 TaskSorting.displayTasksAll(); // So tasks are sorted when user opens program

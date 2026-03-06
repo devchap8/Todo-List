@@ -45,5 +45,18 @@ const getTaskInfo = (taskID) => {
     return myTask;
 }
 
-const TaskState = {getTaskList, makeTask, deleteTaskFromList, getTaskInfo};
+const editTaskInfo = (taskID, taskInfo) => {
+    for(let i = 0; i < taskList.length; i++) {
+        if(taskList[i].id === taskID) {
+            taskList[i].name = taskInfo.name;
+            taskList[i].date = taskInfo.date;
+            taskList[i].description = taskInfo.description;
+            taskList[i].priority = taskInfo.priority;
+            taskList[i].project = taskInfo.project;
+            break;
+        }
+    }
+}
+
+const TaskState = {getTaskList, makeTask, deleteTaskFromList, getTaskInfo, editTaskInfo};
 export {TaskState};

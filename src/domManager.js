@@ -132,10 +132,31 @@ const populateEditTaskFormElements = (task) => {
     editTaskFormElements.taskProjectSelect.value = task.project;
 }
 
+const editTaskInDom = (taskID, taskInfo) => {
+    const displayedTasks = Array.from(document.querySelectorAll(".task:not(.hidden)"));
+    let taskToBeEdited;
+    for(const task of displayedTasks) {
+        if(task.id === taskID) {
+            taskToBeEdited = task;
+            break;
+        }
+    }
+    const editName = taskToBeEdited.querySelector(".taskTitle");
+    const editDate = taskToBeEdited.querySelector(".taskDate");
+    const editProject = taskToBeEdited.querySelector(".taskProject");
+    editName.innerHTML = taskInfo.name;
+    const newDate = new Date(taskInfo.date.replace(/-/g, '\/'));
+    editDate.innerHTML = format(newDate, 'MM/dd/yyyy');
+    editProject.innerHTML = taskInfo.project;
+    taskToBeEdited.className = `prio${taskInfo.priority} task`;
+}
+
 const deleteTaskFromDom = (taskID) => {
     document.getElementById(taskID).remove();
 }
 
-const DomManager = {displayTask, displayProject, addProjectToFormList, toggleAddProjectScreen, toggleEditTaskScreen, 
-    toggleAddTaskScreen, toggleBlur, toggleTaskInfoScreen, openTaskInfoScreen, deleteTaskFromDom, populateEditTaskFormElements};
+const DomManager = {displayTask, displayProject, addProjectToFormList, 
+    toggleAddProjectScreen, toggleEditTaskScreen, toggleAddTaskScreen, toggleBlur, 
+    toggleTaskInfoScreen, openTaskInfoScreen, deleteTaskFromDom,
+     populateEditTaskFormElements, editTaskInDom};
 export {DomManager};
