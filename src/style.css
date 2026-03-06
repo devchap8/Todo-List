@@ -80,6 +80,7 @@ body {
 
 .homepageSidebar {
     padding: 10px 25px;
+    overflow: auto;
 }
 
 .sidebarTitle {
@@ -159,6 +160,11 @@ body {
 
 .taskProject {
     margin-left: auto;
+}
+
+.taskInfoBottom {
+    overflow: auto;
+    height: 445px;
 }
 
 .prio1, .prio1:hover {
