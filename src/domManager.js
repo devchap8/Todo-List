@@ -102,7 +102,7 @@ const addProjectToFormList = (project) => {
     newProject.value = project.name;
     newProject.innerHTML = project.name;
     projectSelect.appendChild(newProject);
-    editProjectSelect.appendChild(newProject);
+    editProjectSelect.innerHTML = projectSelect.innerHTML;
 }
 
 const openTaskInfoScreen = (targetTask) => {

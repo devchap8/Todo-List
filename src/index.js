@@ -32,14 +32,14 @@ const addTaskButtonEventListener = () => {
     addTaskButton.addEventListener("click", openScreen) //
 }
 const addSubmitTaskButtonEventListener = () => {
-    submitTaskButton.addEventListener("click", FormHandling.parseTaskFormData);
+    submitTaskButton.addEventListener("click", makeNewTask);
 }
 
 const addProjectButtonEventListener = () => {
     newProjectButton.addEventListener("click", openScreen); //
 }
 function addProjectFormSubmitEventListener() {
-    projectForm.addEventListener("submit", FormHandling.parseProjectFormData);
+    projectForm.addEventListener("submit", makeNewProject);
 }
 
 const addEditTaskButtonEventListener = () => {
@@ -75,6 +75,24 @@ const addHomepageCloseScreenFunctionEventListener = () => {
 }
 const removeHomepageCloseScreenFunctionEventListener = () => {
     homepage.removeEventListener("click", closeScreen);
+}
+
+const makeNewProject = (event) => {
+    event.preventDefault();
+    const projectData = FormHandling.parseProjectFormData(event);
+    const projectName = projectData.get("projectName");
+    const myProject = ProjectState.makeProject(projectName);
+    DomManager.displayProject(myProject);
+    DomManager.toggleAddProjectScreen();
+}
+
+const makeNewTask = (event) => {
+    event.preventDefault();
+    const taskInfo = FormHandling.parseTaskFormData(event);
+    const myTask = TaskState.makeTask(taskInfo.taskName, taskInfo.taskDate, 
+        taskInfo.taskDescription, taskInfo.taskPriority, taskInfo.taskProject);
+    DomManager.displayTask(myTask);
+    DomManager.toggleAddTaskScreen();
 }
 
 const editTask = (event) => {
