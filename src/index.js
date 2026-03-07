@@ -7,7 +7,6 @@ import { TaskSorting } from "./taskSorting.js";
 import { format } from "date-fns";
 
 const addTaskButton = document.querySelector(".addTaskButton");
-const submitTaskButton = document.querySelector(".submitTaskButton")
 const newProjectButton = document.querySelector(".newProjectButton");
 const projectForm = document.querySelector(".addProjectScreen form");
 const allTasksButton = document.querySelector(".sidebarAll");
@@ -24,15 +23,16 @@ const taskID = document.querySelector(".taskID");
 const deleteTaskButton = document.querySelector(".deleteTaskButton");
 const editTaskButton = document.querySelector(".editTaskButton");
 const editTaskScreen = document.querySelector(".editTaskScreen");
-const submitEditTaskButton = document.querySelector(".submitEditTaskButton");
+const addTaskForm = document.querySelector("#addTaskForm");
+const editTaskForm = document.querySelector("#editTaskForm")
 
 // All main event listeners
 
 const addTaskButtonEventListener = () => {
     addTaskButton.addEventListener("click", openScreen) //
 }
-const addSubmitTaskButtonEventListener = () => {
-    submitTaskButton.addEventListener("click", makeNewTask);
+const addTaskFormEventListener = () => {
+    addTaskForm.addEventListener("submit", makeNewTask); 
 }
 
 const addProjectButtonEventListener = () => {
@@ -45,8 +45,8 @@ function addProjectFormSubmitEventListener() {
 const addEditTaskButtonEventListener = () => {
     editTaskButton.addEventListener("click", openScreen); //
 }
-const addSubmitEditTaskButtonEventListener = () => {
-    submitEditTaskButton.addEventListener("click", editTask);
+const addEditTaskFormEventListener = () => {
+    editTaskForm.addEventListener("submit", editTask);
 }
 
 const addAllTasksButtonEventListener = () => {
@@ -210,9 +210,9 @@ for(const project of ProjectState.getProjectList()) {
 }
 
 addProjectButtonEventListener();
+addTaskFormEventListener();
 addProjectFormSubmitEventListener();
 addTaskButtonEventListener();
-addSubmitTaskButtonEventListener();
 addAllTasksButtonEventListener();
 addTodayTasksButtonEventListener();
 addWeekTasksButtonEventListener();
@@ -222,6 +222,6 @@ addTaskDisplayEventListener();
 addDeleteTaskButtonEventListener();
 addTaskCheckEventListener();
 addEditTaskButtonEventListener();
-addSubmitEditTaskButtonEventListener();
+addEditTaskFormEventListener();
 
 TaskSorting.displayTasksAll(); // So tasks are sorted when user opens program
