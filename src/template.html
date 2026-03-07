@@ -22,6 +22,7 @@
 
             </div>
             <button class="newProjectButton sidebarItem">New Project</button>
+            <button class="deleteProjectButton sidebarItem">Delete Project</button>
         </div>
         <div class="homepageMain">
             <div class="homepageMainTitle">All</div>
@@ -93,6 +94,19 @@
                 <input type="text" id="projectName" name="projectName" placeholder="" required>
             </label>
             <input type="submit" value="Add Project">
+        </form>
+    </div>
+    <div class="deleteProjectScreen addScreen hidden">
+        <form action="" method="set">
+            <div class="formTitle">Remove Project</div>
+            <label for="deleteProjectSelect">
+                <div>Project</div>
+                <div>
+                    <select name="deleteProjectSelect" id="deleteProjectSelect">
+                    </select>
+                </div>
+            </label>
+            <input type="submit" value="Delete Project">
         </form>
     </div>
     <div class="taskInfoScreen hidden">

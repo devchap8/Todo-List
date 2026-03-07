@@ -24,7 +24,9 @@ const deleteTaskButton = document.querySelector(".deleteTaskButton");
 const editTaskButton = document.querySelector(".editTaskButton");
 const editTaskScreen = document.querySelector(".editTaskScreen");
 const addTaskForm = document.querySelector("#addTaskForm");
-const editTaskForm = document.querySelector("#editTaskForm")
+const editTaskForm = document.querySelector("#editTaskForm");
+const deleteProjectButton = document.querySelector(".deleteProjectButton");
+const deleteProjectScreen = document.querySelector(".deleteProjectScreen")
 
 // All main event listeners
 
@@ -38,8 +40,12 @@ const addTaskFormEventListener = () => {
 const addProjectButtonEventListener = () => {
     newProjectButton.addEventListener("click", openScreen); //
 }
-function addProjectFormSubmitEventListener() {
+const addProjectFormSubmitEventListener = () => {
     projectForm.addEventListener("submit", makeNewProject);
+}
+
+const addDeleteProjectButtonEventListener = () => {
+    deleteProjectButton.addEventListener("click", openScreen); // 
 }
 
 const addEditTaskButtonEventListener = () => {
@@ -68,7 +74,12 @@ const addTaskDisplayEventListener = () => {
     taskDisplay.addEventListener("click", openScreen); //
 }
 
-
+const addDeleteTaskButtonEventListener = () => {
+    deleteTaskButton.addEventListener("click", deleteTask); 
+}
+const addTaskCheckEventListener = () => {
+    homepage.addEventListener("change", toggleTaskChecked);
+}
 
 const addHomepageCloseScreenFunctionEventListener = () => {
     homepage.addEventListener("click", closeScreen);
@@ -110,13 +121,11 @@ const deleteTask = () => {
     DomManager.deleteTaskFromDom(deletedTaskID);
     DomManager.toggleTaskInfoScreen();
 }
-const addDeleteTaskButtonEventListener = () => {
-    deleteTaskButton.addEventListener("click", deleteTask);
+
+const deleteProject = () => {
+
 }
 
-const addTaskCheckEventListener = () => {
-    homepage.addEventListener("change", toggleTaskChecked);
-}
 const toggleTaskChecked = (event) => {
     if(event.target.classList.contains("taskCheck")) {
         let task = event.target.parentElement;
@@ -142,6 +151,7 @@ const addHomepageChildrenEventListeners = () => {
     addProjectDisplayEventListener();
     addTaskDisplayEventListener();
     addTaskCheckEventListener();
+    addDeleteProjectButtonEventListener();
 }
 
 const removeHomepageChildrenEventListeners = () => {
@@ -154,11 +164,13 @@ const removeHomepageChildrenEventListeners = () => {
     projectDisplay.removeEventListener("click", TaskSorting.displayCertainProject);
     taskDisplay.removeEventListener("click", openScreen);
     homepage.removeEventListener("click", toggleTaskChecked);
+    deleteProjectButton.removeEventListener("click", deleteProject);
 }
 
 const openScreen = (event) => {
     if(event.target === addTaskButton) DomManager.toggleAddTaskScreen();
     else if(event.target === newProjectButton) DomManager.toggleAddProjectScreen();
+    else if(event.target === deleteProjectButton) DomManager.toggleDeleteProjectScreen();
     else if(event.target === editTaskButton) {
         DomManager.toggleTaskInfoScreen();
         const editTaskID = document.querySelector(".taskID").id;
@@ -183,6 +195,7 @@ const closeScreen = () => {
     else if(!(addProjectScreen.classList.contains("hidden"))) DomManager.toggleAddProjectScreen();
     else if(!(editTaskScreen.classList.contains("hidden"))) DomManager.toggleEditTaskScreen();
     else if(!(taskInfoScreen.classList.contains("hidden"))) DomManager.toggleTaskInfoScreen();
+    else if(!(deleteProjectScreen.classList.contains("hidden"))) DomManager.toggleDeleteProjectScreen();
     addHomepageChildrenEventListeners();
     removeHomepageCloseScreenFunctionEventListener();
 
@@ -223,5 +236,6 @@ addDeleteTaskButtonEventListener();
 addTaskCheckEventListener();
 addEditTaskButtonEventListener();
 addEditTaskFormEventListener();
+addDeleteProjectButtonEventListener();
 
 TaskSorting.displayTasksAll(); // So tasks are sorted when user opens program

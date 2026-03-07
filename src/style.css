@@ -227,9 +227,10 @@ label > span {
     margin-left: 100px;
 }
 
-/* New Project Screen */
+/* New Project Screen / Delete Project Screen */
 
-.addProjectScreen > form {
+.addProjectScreen > form,
+.deleteProjectScreen > form {
     display: grid;
     grid-auto-rows: 1fr;
     justify-content: center;
@@ -238,13 +239,20 @@ label > span {
     height: 100%;
 }
 
-.addProjectScreen label {
+.addProjectScreen label,
+.deleteProjectScreen label {
     display: grid;
     grid-auto-rows: 1fr;
 }
 
-.addProjectScreen label div {
+.addProjectScreen label div,
+.deleteProjectScreen label div {
     font-size: 1.5rem;
+}
+
+.deleteProjectScreen label select {
+    width: 150px;
+    height: 40px;
 }
 
 /* Task Info Screen */
