@@ -58,5 +58,11 @@ const editTaskInfo = (taskID, taskInfo) => {
     }
 }
 
-const TaskState = {getTaskList, makeTask, deleteTaskFromList, getTaskInfo, editTaskInfo};
+const deleteProjectFromTasks = (projectName) => {
+    for(const task of taskList) {
+        if(task.project === projectName) task.project = null;
+    }
+}
+
+const TaskState = {getTaskList, makeTask, deleteTaskFromList, getTaskInfo, editTaskInfo, deleteProjectFromTasks};
 export {TaskState};

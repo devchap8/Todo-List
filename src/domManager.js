@@ -100,6 +100,7 @@ const displayProject = (project) => {
     const newProject = document.createElement("button");
     newProject.classList.add("sidebarItem");
     newProject.classList.add("sidebarProject");
+    newProject.name = project.name;
     newProject.innerHTML = project.name;
     sidebarProjects.appendChild(newProject);
     addProjectToFormList(project);
@@ -110,6 +111,11 @@ const addProjectToFormList = (project) => {
     newProject.value = project.name;
     newProject.innerHTML = project.name;
     projectSelect.appendChild(newProject);
+    editProjectSelect.innerHTML = projectSelect.innerHTML;
+    deleteProjectSelect.innerHTML = projectSelect.innerHTML;
+}
+const removeProjectFromFormList = (project) => {
+    document.querySelector(`#taskProjectSelect [value="${project}"]`).remove();
     editProjectSelect.innerHTML = projectSelect.innerHTML;
     deleteProjectSelect.innerHTML = projectSelect.innerHTML;
 }
@@ -164,8 +170,22 @@ const deleteTaskFromDom = (taskID) => {
     document.getElementById(taskID).remove();
 }
 
+const deleteProjectFromSidebar = (projectName) => {
+    sidebarProjects.querySelector(`[name="${projectName}"]`).remove();
+    
+}
+const deleteProjectFromTaskDisplay = (projectName) => {
+    const taskProjects = Array.from(document.querySelectorAll(".taskProject"));
+    for(const project of taskProjects) {
+        if(project.innerHTML === projectName) {
+            project.innerHTML = "";
+        }
+    }
+}
+
 const DomManager = {displayTask, displayProject, addProjectToFormList, 
     toggleAddProjectScreen, toggleEditTaskScreen, toggleAddTaskScreen, toggleBlur, 
     toggleTaskInfoScreen, openTaskInfoScreen, deleteTaskFromDom,
-     populateEditTaskFormElements, editTaskInDom, toggleDeleteProjectScreen};
+    populateEditTaskFormElements, editTaskInDom, toggleDeleteProjectScreen,
+    deleteProjectFromSidebar, deleteProjectFromTaskDisplay, removeProjectFromFormList};
 export {DomManager};

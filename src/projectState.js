@@ -22,5 +22,14 @@ const makeProject = (name) => {
     }
 }
 
-const ProjectState = {getProjectList, makeProject};
+const deleteProject = (projectName) => {
+    for(let i = 0; i < projectList.length; i++) {
+        if(projectList[i].name === projectName) {
+            projectList.splice(i, 1);
+            break;
+        }
+    }
+}
+
+const ProjectState = {getProjectList, makeProject, deleteProject};
 export {ProjectState}

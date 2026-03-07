@@ -1,6 +1,7 @@
 const projectForm = document.querySelector(".addProjectScreen form");
 const taskForm = document.querySelector(".addTaskScreen form");
 const editTaskForm = document.querySelector(".editTaskScreen form");
+const deleteProjectForm = document.querySelector("#deleteProjectForm");
 
 const parseProjectFormData = (event) => {
     event.preventDefault();
@@ -35,6 +36,12 @@ const parseEditTaskFormData = (event) => {
     return taskInfo;
 }
 
+const parseDeleteProjectFormData = (event) => {
+    event.preventDefault();
+    const taskData = new FormData(deleteProjectForm);
+    return taskData.get("deleteProjectSelect");
+}
 
-const FormHandling = {parseProjectFormData, parseTaskFormData, parseEditTaskFormData};
+
+const FormHandling = {parseProjectFormData, parseTaskFormData, parseEditTaskFormData, parseDeleteProjectFormData};
 export {FormHandling};

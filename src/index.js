@@ -26,7 +26,8 @@ const editTaskScreen = document.querySelector(".editTaskScreen");
 const addTaskForm = document.querySelector("#addTaskForm");
 const editTaskForm = document.querySelector("#editTaskForm");
 const deleteProjectButton = document.querySelector(".deleteProjectButton");
-const deleteProjectScreen = document.querySelector(".deleteProjectScreen")
+const deleteProjectScreen = document.querySelector(".deleteProjectScreen");
+const deleteProjectForm = document.querySelector("#deleteProjectForm");
 
 // All main event listeners
 
@@ -46,6 +47,9 @@ const addProjectFormSubmitEventListener = () => {
 
 const addDeleteProjectButtonEventListener = () => {
     deleteProjectButton.addEventListener("click", openScreen); // 
+}
+const addDeleteProjectFormEventListener = () => {
+    deleteProjectForm.addEventListener("submit", deleteProject);
 }
 
 const addEditTaskButtonEventListener = () => {
@@ -119,11 +123,25 @@ const deleteTask = () => {
     const deletedTaskID = taskID.id;
     TaskState.deleteTaskFromList(deletedTaskID);
     DomManager.deleteTaskFromDom(deletedTaskID);
-    DomManager.toggleTaskInfoScreen();
+    closeScreen();
 }
 
-const deleteProject = () => {
-
+const deleteProject = (event) => {
+    // get the project to be deleted from formHandling -
+    // delete project from project list in projectState -
+    // delete project from sidebar in dom -
+    // delete project from each task button in homepage dom -
+    // delete project from each task's info in taskState -
+    // delete project from select forms in make new task form, delete task form, edit task form
+    // close the delete project screen -
+    event.preventDefault();
+    const projectToDelete = FormHandling.parseDeleteProjectFormData(event);
+    ProjectState.deleteProject(projectToDelete);
+    DomManager.deleteProjectFromSidebar(projectToDelete);
+    DomManager.deleteProjectFromTaskDisplay(projectToDelete);
+    TaskState.deleteProjectFromTasks(projectToDelete);
+    DomManager.removeProjectFromFormList(projectToDelete);
+    closeScreen();
 }
 
 const toggleTaskChecked = (event) => {
@@ -237,5 +255,6 @@ addTaskCheckEventListener();
 addEditTaskButtonEventListener();
 addEditTaskFormEventListener();
 addDeleteProjectButtonEventListener();
+addDeleteProjectFormEventListener();
 
 TaskSorting.displayTasksAll(); // So tasks are sorted when user opens program
