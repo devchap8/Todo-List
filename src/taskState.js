@@ -14,9 +14,11 @@ class Task {
         this.id = crypto.randomUUID();
         this.checked = false;
     }
-    toggleChecked() {
-        this.checked === true ? this.checked = false : this.checked = true;
-    }
+
+}
+
+const toggleChecked = (task) => {
+    task.checked === true ? task.checked = false : task.checked = true;
 }
 
 const makeTask = (name, date, description, priority, project) => {
@@ -69,5 +71,5 @@ const pullTaskListFromStorage = (storageList) => {
 }
 
 const TaskState = {getTaskList, makeTask, deleteTaskFromList, getTaskInfo, 
-    editTaskInfo, deleteProjectFromTasks, pullTaskListFromStorage};
+    editTaskInfo, deleteProjectFromTasks, pullTaskListFromStorage, toggleChecked};
 export {TaskState};
