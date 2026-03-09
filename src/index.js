@@ -4,6 +4,7 @@ import { DomManager } from "./domManager.js";
 import { ProjectState } from "./projectState.js";
 import { FormHandling } from "./formHandling.js";
 import { TaskSorting } from "./taskSorting.js";
+import { TasksLocalStorage } from "./localStorage.js";
 import { format } from "date-fns";
 
 const addTaskButton = document.querySelector(".addTaskButton");
@@ -99,6 +100,7 @@ const makeNewProject = (event) => {
     const myProject = ProjectState.makeProject(projectName);
     DomManager.displayProject(myProject);
     DomManager.toggleAddProjectScreen();
+    TasksLocalStorage.storeList("projectList", ProjectState.getProjectList());
 }
 
 const makeNewTask = (event) => {
@@ -108,6 +110,7 @@ const makeNewTask = (event) => {
         taskInfo.taskDescription, taskInfo.taskPriority, taskInfo.taskProject);
     DomManager.displayTask(myTask);
     DomManager.toggleAddTaskScreen();
+    TasksLocalStorage.storeList("taskList", TaskState.getTaskList());
 }
 
 const editTask = (event) => {
@@ -117,6 +120,7 @@ const editTask = (event) => {
     TaskState.editTaskInfo(editTaskID, taskInfo);
     DomManager.editTaskInDom(editTaskID, taskInfo);
     closeScreen();
+    TasksLocalStorage.storeList("taskList", TaskState.getTaskList());
 }
 
 const deleteTask = () => {
@@ -124,16 +128,10 @@ const deleteTask = () => {
     TaskState.deleteTaskFromList(deletedTaskID);
     DomManager.deleteTaskFromDom(deletedTaskID);
     closeScreen();
+    TasksLocalStorage.storeList("taskList", TaskState.getTaskList());
 }
 
 const deleteProject = (event) => {
-    // get the project to be deleted from formHandling -
-    // delete project from project list in projectState -
-    // delete project from sidebar in dom -
-    // delete project from each task button in homepage dom -
-    // delete project from each task's info in taskState -
-    // delete project from select forms in make new task form, delete task form, edit task form
-    // close the delete project screen -
     event.preventDefault();
     const projectToDelete = FormHandling.parseDeleteProjectFormData(event);
     ProjectState.deleteProject(projectToDelete);
@@ -142,6 +140,8 @@ const deleteProject = (event) => {
     TaskState.deleteProjectFromTasks(projectToDelete);
     DomManager.removeProjectFromFormList(projectToDelete);
     closeScreen();
+    TasksLocalStorage.storeList("projectList", ProjectState.getProjectList());
+    TasksLocalStorage.storeList("taskList", TaskState.getTaskList());
 }
 
 const toggleTaskChecked = (event) => {
@@ -154,6 +154,7 @@ const toggleTaskChecked = (event) => {
             task.classList.remove("checked");
         }
     }
+    TasksLocalStorage.storeList("taskList", TaskState.getTaskList());
 }
 
 // Handling for opening / closing forms
@@ -219,26 +220,40 @@ const closeScreen = () => {
 
 }
 
+const initialStorageSetup = () => {
+    if(localStorage.getItem("taskList") !== null && localStorage.getItem("projectList") !== null) {
+        TaskState.pullTaskListFromStorage(TasksLocalStorage.getList("taskList"));
+        ProjectState.pullProjectListFromStorage(TasksLocalStorage.getList("projectList"));
+        displayTasksProjects();
+    } else {
+        setupInitialTasksProjects();
+    }
+}
+
+const setupInitialTasksProjects = () => {
+    // TaskState.makeTask("Long Description", "09/16/2026", "hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello ", 1, "Project 2");
+    TaskState.makeTask("MyTask", "09/16/2026", "This is the description", 2, "Project 1");
+    TaskState.makeTask("MyTask", "08/16/2026", "This is the description", 3, "Project 2");
+    TaskState.makeTask("MyTask", "09/16/2027", "This is the description", 4, "Project 1");
+    TaskState.makeTask("MyTask", "09/25/2026", "This is the description", 5, "Project 1");
+    const today = format(new Date(), 'MM/dd/yyyy');
+    TaskState.makeTask("Due Today", today, "This is the description", 5, "Project 1");
+    ProjectState.makeProject("Project 1");
+    ProjectState.makeProject("Project 2");
+    ProjectState.makeProject("Project 3");
+    displayTasksProjects();
+    TasksLocalStorage.storeList("taskList", TaskState.getTaskList());
+    TasksLocalStorage.storeList("projectList", ProjectState.getProjectList());
+}
+
+const displayTasksProjects = () => {
+    TaskSorting.displayTasksAll();
+    for(const project of ProjectState.getProjectList()) {
+        DomManager.displayProject(project);
+    }
+}
+
 // Initial Setup
-
-TaskState.makeTask("Long Description", "09/16/2026", "hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello ", 1, "Project 2");
-TaskState.makeTask("MyTask", "09/16/2026", "This is the description", 2, "Project 1");
-TaskState.makeTask("MyTask", "08/16/2026", "This is the description", 3, "Project 2");
-TaskState.makeTask("MyTask", "09/16/2027", "This is the description", 4, "Project 1");
-TaskState.makeTask("MyTask", "09/25/2026", "This is the description", 5, "Project 1");
-const today = format(new Date(), 'MM/dd/yyyy');
-TaskState.makeTask("Due Today", today, "This is the description", 5, "Project 1");
-
-const project1 = ProjectState.makeProject("Project 1");
-const project2 = ProjectState.makeProject("Project 2");
-const project3 = ProjectState.makeProject("Project 3");
-
-for(const task of TaskState.getTaskList()) {
-    DomManager.displayTask(task);
-}
-for(const project of ProjectState.getProjectList()) {
-    DomManager.displayProject(project);
-}
 
 addProjectButtonEventListener();
 addTaskFormEventListener();
@@ -258,3 +273,11 @@ addDeleteProjectButtonEventListener();
 addDeleteProjectFormEventListener();
 
 TaskSorting.displayTasksAll(); // So tasks are sorted when user opens program
+
+initialStorageSetup();
+
+// TasksLocalStorage.storeList("taskList", TaskState.getTaskList());
+// console.log(TasksLocalStorage.getList("taskList"));
+
+
+

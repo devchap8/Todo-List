@@ -1,6 +1,6 @@
 import { format, parseISO } from "date-fns";
 
-const taskList = [];
+let taskList = [];
 const getTaskList = () => [...taskList];
 
 class Task {
@@ -64,5 +64,10 @@ const deleteProjectFromTasks = (projectName) => {
     }
 }
 
-const TaskState = {getTaskList, makeTask, deleteTaskFromList, getTaskInfo, editTaskInfo, deleteProjectFromTasks};
+const pullTaskListFromStorage = (storageList) => {
+    taskList = storageList;
+}
+
+const TaskState = {getTaskList, makeTask, deleteTaskFromList, getTaskInfo, 
+    editTaskInfo, deleteProjectFromTasks, pullTaskListFromStorage};
 export {TaskState};

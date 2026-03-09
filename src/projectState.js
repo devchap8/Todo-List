@@ -1,4 +1,4 @@
-const projectList = [];
+let projectList = [];
 const getProjectList = () => [...projectList];
 
 class Project {
@@ -31,5 +31,9 @@ const deleteProject = (projectName) => {
     }
 }
 
-const ProjectState = {getProjectList, makeProject, deleteProject};
+const pullProjectListFromStorage = (storageList) => {
+    projectList = storageList;
+}
+
+const ProjectState = {getProjectList, makeProject, deleteProject, pullProjectListFromStorage};
 export {ProjectState}
